@@ -8,7 +8,7 @@ def relay_messages(server_socket):
 
     while True:
         data, addr = server_socket.recvfrom(256*4*4)  # Получаем данные и адрес клиента
-        print(f"Received message from {addr}: {data.size()} bytes")
+        print(f"Received message from {addr}: {len(data)} bytes")
         
         server_socket.sendto(data, receiver_addr)
         print(f"Relayed message to {receiver_addr}")
