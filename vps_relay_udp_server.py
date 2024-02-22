@@ -1,12 +1,17 @@
-﻿
+﻿import time
 import socket
 
 def relay_messages(server_socket):
     data, receiver_addr = server_socket.recvfrom(1024)  # Получаем данные и адрес клиента
     print(f"Received message from {receiver_addr}: {data.decode()}")
+    
     receiver_message = "Waiting data from transmitter..."
     print("Waiting data from transmitter...")
     server_socket.sendto(receiver_message.encode(), receiver_addr)
+    receiver_message = "Test..."
+    for i in range(11):
+        server_socket.sendto(receiver_message.encode(), receiver_addr)
+        time.sleep(1)
 
     while True:
         data, addr = server_socket.recvfrom(265*4*4)  # Получаем данные и адрес клиента
