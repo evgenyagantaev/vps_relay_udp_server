@@ -7,8 +7,8 @@ def relay_messages(server_socket):
     print("Waiting data from transmitter...")
 
     while True:
-        data, addr = server_socket.recvfrom(1024)  # Получаем данные и адрес клиента
-        print(f"Received message from {addr}: {data.decode()}")
+        data, addr = server_socket.recvfrom(256*4*4)  # Получаем данные и адрес клиента
+        print(f"Received message from {addr}: {data.size()} bytes")
         
         server_socket.sendto(data, receiver_addr)
         print(f"Relayed message to {receiver_addr}")
